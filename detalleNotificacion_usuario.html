@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Detalles Notificacion-Usuario</title>
+    <link rel="stylesheet" href="view/css/abm.css">
+    <style>
+        tr {
+            display: grid;
+            grid-template-columns: 1fr 2fr 2fr;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenedor-gral">
+        <div class="banner">
+            <div class="logo">
+                <img src="view/img/logo_ESIC_blanco 1.svg" alt="">
+            </div>
+            <div class="espacio"></div>
+            <div class="botones-inicio-notificar">
+                <a href="index.html"><button class="boton-banner">INICIO</button></a>
+                <button class="boton-banner">NOTIFICAR</button>
+            </div>
+        </div>
+        <div class="elemento-arriba">
+            <div class="componente"></div>
+            <div class="rectangulo-vertical"></div>
+        </div>
+        <div class="nombre">
+            Usuarios-Notificaciones
+        </div>
+        <div class="contenedor">
+            <div class="cuerpo">
+                <div class="boton-alta">
+                    <button class="botones">ALTA</button>
+                </div>
+                <div class="entradas">
+
+                    <input class="inputs" type="text" id="usuario_id" name="usuario_id" placeholder="ID Usuario">
+                    <input class="inputs" type="text" id="notificacion_id" name="notificacion_id" placeholder="ID Notificacion">
+
+                    <button class="lupa" onclick="buscar()"><span
+                            class="material-symbols-outlined">search</span></button>
+                </div>
+                <div class="tabla">
+                    <table id="tabla">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th class="col-id-usuario">ID Usuario</th>
+                                <th class="col-id-notificacion">ID Notificacion</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+                <div id="errorTabla">No hay datos correspondientes a los valores introducidos</div>
+                <div class="botones-baja-modificacion">
+                    <button class="botones" id="btnBaja" disabled>BAJA</button>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="elemento-abajo" id="doss">
+            <div class="componente" id="dos"></div>
+            <div class="rectangulo-vertical"></div>
+        </div>
+
+    </div>
+
+    <script>
+        window.onload = function () {
+            document.getElementById("errorTabla").style.display = 'none';
+        }
+        function buscar() {
+            var usuario_id = document.getElementById("usuario_id").value;
+            var notificacion_id = document.getElementById("notificacion_id").value;
+
+            var parametros = [];
+
+            if (usuario_id) {
+                parametros.push(`usuario_id=${usuario_id}`);
+            }
+
+            if (notificacion_id) {
+                parametros.push(`notificacion_id=${notificacion_id}`);
+            }
+
+            const url = `buscarUsuario_Notificacion.php${parametros.length > 0 ? '?' + parametros.join('&') : ''}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => mostrar(data))
+                .catch(error => console.log(error));
+        }
+
+        function mostrar(usuarios) {
+            var tabla = document.getElementById("tabla");
+            var long = tabla.getElementsByTagName("tr").length;
+            for (let i = 1; i < long; i++) {
+                tabla.getElementsByTagName("tr")[1].remove();
+            }
+            if (usuarios.length == 0) {
+                document.getElementById("errorTabla").style.removeProperty("display");
+            } else {
+                document.getElementById("errorTabla").style.display = "none";
+            }
+            console.log(usuarios);
+            usuarios.forEach(createTabla);
+        }
+
+        // <td class="check">
+        //     <input type="checkbox" id="checkbox" name="checkbox">
+        //         <label for="checkbox"></label>
+        // </td>
+
+        function createTabla(ele, id) {
+            console.log(ele)
+            var tabla = document.getElementById("tabla");
+            var tr = document.createElement("tr");
+
+            var td = document.createElement("td");
+            var txt = document.createTextNode(ele.id);
+            // td.appendChild(txt);
+            // td.className="c0";
+            // td.style.display= "none";
+            // tr.append(td);
+
+            // td = document.createElement("td");
+            td.className = "check";
+
+
+            var ch = document.createElement("input");
+            ch.type = "checkbox";
+            ch.name = "checkbox" + id;
+            ch.id = "checkbox" + id;
+            // ch.className = "check";
+            ch.onclick = Chequeado;
+            td.append(ch);
+            // td.className="c1";
+
+            var label = document.createElement("label");
+            label.htmlFor = "checkbox";
+            td.append(label);
+            tr.append(td);
+
+            var td = document.createElement("td");
+            var txt = document.createTextNode(ele.Notificacion_id);
+            td.appendChild(txt);
+            td.className = "c2";
+            tr.append(td);
+
+            var td = document.createElement("td");
+            var txt = document.createTextNode(ele.usuario_id);
+            td.appendChild(txt);
+            td.className = "c3";
+            tr.append(td);
+
+            tabla.append(tr);
+        }
+
+        function Chequeado() {
+            var checks = document.getElementsByTagName("input");
+            var marcados = false;
+            for (let i = 0; i < checks.length; i++) {
+                if (checks[i].type == "checkbox" && checks[i].checked) {
+                    if (checks[i].checked == true) {
+                        marcados = true;
+                    }
+                }
+            }
+            if (marcados == true) {
+                document.getElementById("btnBaja").disabled = false;
+            } else {
+                document.getElementById("btnBaja").disabled = true;
+            }
+        }
+
+    </script>
+    <script>
+        function navegar(url) {
+            window.location = url;
+        }
+    </script>
+</body>
+
+</html>

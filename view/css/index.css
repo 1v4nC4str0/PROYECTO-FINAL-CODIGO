@@ -1,0 +1,196 @@
+@font-face {
+    font-family: 'Uniform Pro Extra Condensed';
+    src: local('UniformProXcon-Reg'), local('UniformProXcon-Reg'),
+        url('fonts/UniformProXcon-Reg/UniformProXcon-Reg.woff2') format('woff2'),
+        url('fonts/UniformProXcon-Reg/UniformProXcon-Reg.woff') format('woff'),
+        url('fonts/UniformProXcon-Reg/UniformProXcon-Reg.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PF Bague Sans Pro';
+    src: local('PFBagueSansPro'), local('PFBagueSansPro'),
+        url('fonts/PFBagueSansPro/PFBagueSansPro.woff2') format('woff2'),
+        url('fonts/PFBagueSansPro/PFBagueSansPro.woff') format('woff'),
+        url('fonts/PFBagueSansPro/PFBagueSansPro.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.contenedor-gral {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.banner {
+    display: flex;
+    background-color: #0047E9;
+    border: 2px solid #0047E9;
+    width: 100%;
+    height: 15vh;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0 10px;
+}
+
+.logo {
+    display: flex;
+    min-width: 50px;
+    min-height: 25px;
+    height: 50%;
+}
+
+.espacio {
+    width: 100%;
+}
+
+.botones-inicio-notificar {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    /* background-color: #FFF; */
+    padding-right: 50px;
+    /* justify-content: end; */
+
+
+}
+
+.boton-banner {
+    border: 2px solid #FFF;
+    background-color: #0047E9;
+    color: white;
+    width: 150px;
+    height: 30px;
+    font-family: 'Uniform Pro Extra Condensed', sans-serif;
+    cursor: pointer;
+    font-size: larger;
+    transition: 0.1s all linear;
+
+    &:hover {
+        background-color: white;
+        border-color: #0047E9;
+        color: #0047E9;
+    }
+}
+
+.elemento-arriba {
+    padding-top: 50px;
+}
+
+.componente {
+    position: relative;
+    margin: 0 5%;
+    width: 130px;
+    height: 20px;
+    background-color: #0047E9;
+    z-index: -1;
+}
+
+.nombre {
+    color: #0047E9;
+    text-align: center;
+    font-family: 'Uniform Pro Extra Condensed', sans-serif;
+    font-size: 38px;
+}
+
+.contenedor {
+    display: flex;
+    justify-content: center;
+}
+
+.cuerpo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px 0;
+    width: 80%;
+}
+
+#principal {
+    display: flex;
+    justify-content: center;
+}
+
+.cuerpo {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    width: 80%;
+    row-gap: 10px;
+}
+
+/* p{
+    font-family:  "Uniform extra ";
+} */
+.seccion {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    place-content: center;
+}
+
+.componente {
+    position: relative;
+    margin: 0 5%;
+    width: 130px;
+    height: 20px;
+    background-color: #0047E9;
+    z-index: -1;
+}
+
+.rectangulo-vertical {
+    background-color: #0047E9;
+    margin: 0 5%;
+    height: 20px;
+    width: 20px;
+}
+
+.titulo {
+
+    display: flex;
+    justify-content: center;
+    padding-right: 20px;
+    color: #0047E9;
+    /* text-align: center; */
+    font-family: 'Uniform Pro Extra Condensed', sans-serif;
+    font-size: 30px;
+}
+
+#doss {
+    display: grid;
+    justify-items: end;
+    transform: rotateX(180deg);
+}
+
+#not {
+    border: 2px solid #FFF;
+    background-color: #0047E9;
+    color: white;
+    width: 150px;
+    height: 30px;
+    font-family: 'PF Bague Sans Pro', sans-serif;
+    cursor: pointer;
+    transition: 0.1s all linear;
+    margin-right: 50px;
+
+    &:hover {
+        background-color: white;
+        border-color: #0047E9;
+        color: #0047E9;
+    }
+}
+
+.imagen-caja {
+    width: 200px;
+    height: 200px;
+    /* border: 3px solid #0047E9; */
+    transition: 0.2s all linear;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}

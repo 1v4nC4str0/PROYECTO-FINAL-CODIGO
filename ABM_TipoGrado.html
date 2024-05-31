@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>ABM Tipo Grado</title>
+    <link rel="stylesheet" href="view/css/abm.css">
+    <link rel="stylesheet" href="view/css/4abm.css">
+</head>
+
+<body>
+    <div class="contenedor-gral">
+        <div class="banner">
+            <div class="logo">
+                <img src="view/img/logo_ESIC_blanco 1.svg" alt="">
+            </div>
+            <div class="espacio"></div>
+            <div class="botones-inicio-notificar">
+                <a href="index.html"><button class="boton-banner">INICIO</button></a>
+                <button class="boton-banner" onclick="navegar('notificar_general.php')">NOTIFICAR</button>
+            </div>
+        </div>
+        <div class="elemento-arriba">
+            <div class="componente"></div>
+            <div class="rectangulo-vertical"></div>
+        </div>
+        <div class="nombre">
+            Tipos de Grado
+        </div>
+        <div class="contenedor">
+            <div class="cuerpo">
+                <div class="boton-alta">
+                    <button id="boton-alta" onclick="monstrarPopupAlta()" class="botones">ALTA</button>
+                </div>
+                <div class="entradas">
+
+                    <input class="inputs" type="text" id="id" name="id" placeholder="ID">
+                    <input class="inputs" type="text" id="nombre" name="nombre" placeholder="NOMBRE">
+
+                    <button class="lupa" onclick="buscarTipoGrado()"><span
+                            class="material-symbols-outlined">search</span></button>
+                </div>
+                <div class="tabla">
+                    <table id="tabla">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="checkTodos" onclick="selectAll()"></th>
+                                <th class="col-id">ID</th>
+                                <th class="col-nombre">NOMBRE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo">
+                        </tbody>
+
+                    </table>
+                    <!-- <div id="errorTabla">No hay resultados</div> -->
+                </div>
+                <div class="botones-baja-modificacion">
+                    <button class="botones" onclick="mostrarPopupBaja()" id="boton-baja">BAJA</button>
+                    <button class="botones" onclick="mostrarPopupMod()" id="boton-modificar">MODIFICAR</button>
+                </div>
+
+            </div>
+        </div>
+        <div class="elemento-abajo" id="doss">
+            <div class="componente" id="dos"></div>
+            <div class="rectangulo-vertical"></div>
+        </div>
+
+    </div>
+    <div id="popup-alta" class="popup">
+        <div class="contenedor-popup">
+            <div id="banner-popup">
+                <div id="nombre1-popup">ALTA</div>
+                <div class="espacio"></div>
+                <span class="close-btn" onclick="ocultarPopupAlta()">&times;</span>
+            </div>
+            <div class="elemento-arriba">
+                <div class="componente1"></div>
+                <div class="rectangulo-vertical"></div>
+            </div>
+            <div class="popup-content">
+                <div class="popup-cuerpo">
+                    <div id="contenido-popup">
+                        <div class="entradas-popup">
+                            <label class="label-popup" for="nombre-mod">NOMBRE</label>
+                            <input class="inputs-popup" type="text" id="nombre-popup" name="nombre-popup">
+                        </div>
+                    </div>
+                    <div class="botones-baja-modificacion">
+                        <button class="botones" onclick="alta()">ACEPTAR</button>
+                        <button class="botones" onclick="ocultarPopupAlta()">CANCELAR</button>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="elemento-abajo" id="doss">
+                <div class="componente" id="dos"></div>
+                <div class="rectangulo-vertical"></div>
+            </div>
+        </div>
+    </div>
+    <div id="popup-modificar" class="popup">
+        <div class="contenedor-popup">
+            <div id="banner-popup">
+                <div id="nombre1-popup">MODIFICACIÓN</div>
+                <div class="espacio"></div>
+                <span class="close-btn" onclick="ocultarPopupMod()">&times;</span>
+            </div>
+            <div class="elemento-arriba">
+                <div class="componente1"></div>
+                <div class="rectangulo-vertical"></div>
+            </div>
+            <div class="popup-content">
+                <div class="popup-cuerpo">
+                    <div id="contenido-popup">
+                        <div class="entradas-popup">
+                            <input type="hidden" name="modId" id="modId">
+                            <label class="label-popup" for="nombre-mod">NOMBRE</label>
+                            <input class="inputs-popup" type="text" id="nombre-mod" name="nombre-mod">
+                        </div>
+                    </div>
+                    <div class="botones-baja-modificacion">
+                        <button class="botones" onclick="modificar()">ACEPTAR</button>
+                        <button class="botones" onclick="ocultarPopupMod()">CANCELAR</button>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="elemento-abajo" id="doss">
+                <div class="componente" id="dos"></div>
+                <div class="rectangulo-vertical"></div>
+            </div>
+        </div>
+    </div>
+    <div id="popup-baja" class="popup">
+        <div class="contenedor-popup">
+            <div id="banner-popup">
+                <div id="nombre1-popup">BAJA</div>
+                <div class="espacio"></div>
+                <span class="close-btn" onclick="ocultarPopupBaja()">&times;</span>
+            </div>
+            <div class="elemento-arriba">
+                <div class="componente1"></div>
+                <div class="rectangulo-vertical"></div>
+            </div>
+            <div class="popup-content">
+                <div class="popup-cuerpo">
+                    <div class="texto-baja">
+                        ¿ESTÁ SEGURO QUE DESEA ELIMINAR EL REGISTRO SELECCIONADO?
+                    </div>
+                    <input type="hidden" name="bajaId" id="bajaId">
+                    <div class="botones-baja-modificacion">
+                        <button class="botones" onclick="baja(valuesToDelete)">ACEPTAR</button>
+                        <button class="botones" onclick="ocultarPopupBaja()">CANCELAR</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="elemento-abajo" id="doss">
+                <div class="componente" id="dos"></div>
+                <div class="rectangulo-vertical"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        window.onload = comprobarChecks;
+
+        //CONSULTA TIPOGRADO
+        function buscarTipoGrado() {
+            var inputNombre = document.getElementById('nombre').value;
+            var inputId = document.getElementById('id').value;
+
+            fetch('../../api/tokenProvider.php')
+                .then(response => response.json())
+                .then(data => {
+                    const token = data.token;
+                    const formData = new FormData();
+                    if (inputId!="") {
+                        formData.append('tipo_grado_ID', inputId);
+                    }
+                    
+                    if (inputNombre!="") {
+                        formData.append('tipo_grado_nombre', inputNombre);
+                    }
+                    const url = "../../api/SBconsultaTipoGrado.php";
+                    return fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'token': token
+                        },
+                        body: formData
+                    });
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Response not OK: ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    mostrar(data);
+                    comprobarChecks();
+                })
+                .catch(error => console.log('Error:', error));
+        }
+        //ALTA
+
+        function alta(){
+            inputNombre=document.getElementById('nombre-popup').value;
+
+            fetch('../../api/tokenProvider.php')
+                .then(response => response.json())
+                .then(data => {
+                    const token = data.token;
+                    const formData = new FormData();
+                
+                        formData.append('tipo_grado_nombre', inputNombre);
+                    
+                    const url = "../../api/SBaltaTipoGrado.php";
+                    return fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'token': token
+                        },
+                        body: formData
+                    });
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Response not OK: ' + response.statusText);
+                    }
+                    buscarTipoGrado();
+                    ocultarPopupAlta();
+                    
+                })
+                .catch(error => console.log('Error:', error));
+        }
+
+        //Baja
+
+        var valuesToDelete;
+
+        function baja(valuesToDelete) {
+            for (let i = 0; i < valuesToDelete.length; i++) {
+                fetch('../../api/tokenProvider.php')
+                .then(response => response.json())
+                .then(data => {
+                    const token = data.token;
+                    const formData = new FormData();
+                
+                        formData.append('tipo_grado_ID', valuesToDelete[i]);
+                    
+                    const url = "../../api/SBbajaTipoGrado.php";
+                    return fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'token': token
+                        },
+                        body: formData
+                    });
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Response not OK: ' + response.statusText);
+                    } else {
+                        buscarTipoGrado();
+                        ocultarPopupBaja();
+                        
+                    }
+                })
+                .catch(error => console.log('Error:', error));
+                
+            }
+        }
+
+        //Modificacion
+
+        function modificar() {
+                fetch('../../api/tokenProvider.php')
+                .then(response => response.json())
+                .then(data => {
+                    const token = data.token;
+                    const formData = new FormData();
+                
+                        formData.append('tipo_grado_ID', document.getElementById('modId').value);
+                        formData.append('tipo_grado_nombre', document.getElementById('nombre-mod').value);
+                    
+                    const url = "../../api/SBupdateTipoGrado.php";
+                    return fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'token': token
+                        },
+                        body: formData
+                    });
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Response not OK: ' + response.statusText);
+                    } else {
+                        buscarTipoGrado();
+                        ocultarPopupMod();
+                        
+                    }
+                })
+                .catch(error => console.log('Error:', error));
+        }
+
+        //Mostrar popups
+            //Popup alta
+        function monstrarPopupAlta() {
+            popupAlta = document.getElementById('popup-alta');
+            popMostrar(popupAlta);
+        }
+        function ocultarPopupAlta(){
+            popupAlta = document.getElementById('popup-alta');
+            popOcultar(popupAlta);
+        }
+            //Popup baja
+
+        function mostrarPopupBaja() {
+            popupBaja = document.getElementById('popup-baja');
+            valuesToDelete = getSelectedCheckboxes();
+            console.log(valuesToDelete);
+            popMostrar(popupBaja);
+        }
+
+        function ocultarPopupBaja(){
+            popupBaja = document.getElementById('popup-baja');
+            popOcultar(popupBaja);
+        }
+
+            //Popup modificar
+        
+        function mostrarPopupMod() {
+            popupMod = document.getElementById('popup-modificar');
+            valuesToUpdate = getSelectedCheckboxes();
+            console.log(valuesToUpdate);
+            getTipoGrado(valuesToUpdate[0]);
+            
+            popMostrar(popupMod);
+        }
+
+        function ocultarPopupMod(){
+            popupMod = document.getElementById('popup-modificar');
+            popOcultar(popupMod);
+        }
+
+
+        function popMostrar(element){
+            element.style.display='flex';
+        }
+
+        function popOcultar(element){
+            element.style.display='none';
+        }
+
+        //MOSTRAR FUNCION
+
+        function mostrar(usuarios) {
+            var cuerpo = document.getElementById("cuerpo");
+            cuerpo.innerHTML = "";
+
+            var tabla = usuarios;
+            for (let i = 0; i < tabla.length; i++) {
+                var tr = document.createElement("tr");
+
+                var box = document.createElement("td");
+                var check = document.createElement("input");
+                check.type = "checkbox";
+                check.onclick = comprobarChecks;
+                check.id=tabla[i].tipo_grado_ID;
+                box.append(check);
+                tr.append(box);
+                console.log(tabla[i]);
+                td1 = document.createElement("td");
+                td1.innerHTML = tabla[i].tipo_grado_ID;
+                td2 = document.createElement("td");
+                td2.innerHTML = tabla[i].tipo_grado_nombre;
+
+                tr.append(td1, td2);
+                cuerpo.append(tr);
+            }
+            /* asignarEventosCheckbox();
+            actualizarCheckboxPrincipal(); */
+        }
+
+        //FUNCION DE CONSULTA POR ID SENCILLA
+
+        function getTipoGrado(id) {
+    return fetch('../../api/tokenProvider.php')
+        .then(response => response.json())
+        .then(data => {
+            const token = data.token;
+            const formData = new FormData();
+            
+            formData.append('tipo_grado_ID', id);
+            
+            const url = "../../api/SconsultaTipoGrado.php";
+            return fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Token': token
+                },
+                body: formData
+            });
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Response not OK: ' + response.statusText);
+            }
+            return response.json();  // Convertir la respuesta a JSON y devolver la promesa
+        })
+        .then(data => {
+            asignarMod(data);
+        })
+        .catch(error => console.log('Error:', error));
+}
+
+function asignarMod(data) {
+    console.log(data[0].tipo_grado_nombre);
+    document.getElementById('nombre-mod').value = data[0].tipo_grado_nombre;
+    document.getElementById('modId').value = data[0].tipo_grado_ID;
+}
+        //FUNCION PARA OBTENER LOS ELEMENTOS MARCADOS
+        function getSelectedCheckboxes() {
+            // Selecciona todos los checkboxes dentro de la tabla con id "myTable" que estén marcados
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            var selectedValues = [];
+            checkboxes.forEach(function(checkbox) {
+                selectedValues.push(checkbox.id);
+            });
+            return selectedValues;
+        }
+
+        //Funcion para comprobar si activar los botones
+
+        function comprobarChecks(){
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            var botonBaja = document.getElementById('boton-baja');
+            var botonMod = document.getElementById('boton-modificar');
+            console.log(checkboxes);
+            if (checkboxes.length==0) {
+                botonBaja.disabled=true;
+                botonMod.disabled=true;
+            } 
+            if(checkboxes.length==1){
+                botonBaja.disabled=false;
+                botonMod.disabled=false;
+            } 
+            if(checkboxes.length>=2){
+                botonBaja.disabled=false;
+                botonMod.disabled=true;
+            }
+            
+        }
+
+        function selectAll(){
+            var megaCheckbox =document.getElementById('checkTodos');
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            if (megaCheckbox.checked) {
+                for (let i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].checked=true;
+                    
+                }
+                
+            } else {
+                for (let i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].checked=false;
+                    
+                }
+            }
+            comprobarChecks();
+        }
+    </script>
+    <script>
+        function navegar(url) {
+            window.location = url;
+        }
+    </script>
+</body>
+
+</html>

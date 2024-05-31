@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'PF Bague Sans Pro';
+    src: local('PF Bague Sans Pro Regular'), local('PF-Bague-Sans-Pro-Regular'),
+        url('PFBagueSansPro.woff2') format('woff2'),
+        url('PFBagueSansPro.woff') format('woff'),
+        url('PFBagueSansPro.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }

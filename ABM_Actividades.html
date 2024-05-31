@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>ABM Actividades</title>
+    <link rel="stylesheet" href="view/css/abm.css">
+    <style>
+        .contenedor-popup {
+            position: fixed;
+            margin: 5%;
+            z-index: 9999;
+            overflow: auto;
+        }
+
+        .inputs-popup {
+            box-sizing: border-box;
+            height: 2em;
+            text-indent: 10px;
+        }
+
+        #img-popup-alta,
+        #img-popup-modf {
+            width: 30% !important;
+            border: 2px solid #0047E9;
+            ;
+
+        }
+
+        #contenido-popup {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        #text_popup_baja {
+            font-size: 15px;
+            text-align: center;
+            letter-spacing: 0.76px;
+        }
+
+        #errorTabla {
+            color: #0047E9;
+            font-family: 'Uniform Pro Extra Condensed', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenedor-gral">
+        <div class="banner">
+            <div class="logo" onclick="navegar('index.html')">
+                <img src="view/img/logomasEsic.png" alt="Inicio">
+            </div>
+            <div class="espacio"></div>
+            <div class="botones-inicio-notificar">
+                <a href="index.html"><button class="boton-banner">INICIO</button></a>
+                <button class="boton-banner" onclick="navegar('notificar_general.php')">NOTIFICAR</button>
+            </div>
+        </div>
+        <div class="elemento-arriba">
+            <div class="componente"></div>
+            <div class="rectangulo-vertical"></div>
+        </div>
+        <div class="nombre">
+            ACTIVIDADES
+        </div>
+        <div class="contenedor">
+            <div class="cuerpo">
+                <div class="boton-alta">
+                    <button class="botones" id="boton-alta">ALTA</button>
+                </div>
+                <div class="entradas">
+                    <input class="inputs" type="text" id="nombre" name="Actividad_nombre"
+                        placeholder="NOMBRE DE LA ACTIVIDAD">
+                    <input class="inputs" type="text" id="Actividad_descripcion" name="Actividad_descripcion"
+                        placeholder="DESCRIPCIÓN">
+                    <select class="inputs" name="tipo_act_ent" id="tipo_act_ent">
+                    </select>
+                    <div></div>
+
+                    <button class="lupa" id="lupa" onclick="buscarActividad()"><span
+                            class="material-symbols-outlined">search</span></button>
+                </div>
+                <div class="tabla">
+                    <table id="tabla">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="check-todos" disabled></th>
+                                <th class="col-id">ACTIVIDAD ID</th>
+                                <th class="col-nombre">NOMBRE</th>
+                                <th class="col-fecha">DESCRIPCIÓN</th>
+                                <th class="col-descripcion">FOTO</th>
+                                <th class="col-descripcion">NOMBRE DE TIPO ACTIVIDAD</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo"></tbody>
+
+                    </table>
+                    <div id="errorTabla"></div>
+                </div>
+                <div class="botones-baja-modificacion">
+                    <button class="botones" id="boton-baja">BAJA</button>
+                    <button class="botones" id="boton-modificar">MODIFICAR</button>
+                    <a><button id="boton-detalle" class="botones" onclick="detalles()" disabled>ALUMNOS</button></a>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="elemento-abajo" id="doss">
+            <div class="componente" id="dos"></div>
+            <div class="rectangulo-vertical"></div>
+        </div>
+
+    </div>
+    <div id="popup-alta" class="popup">
+        <div class="contenedor-popup">
+            <div id="banner-popup">
+                <div id="nombre1-popup">ALTA</div>
+                <div class="espacio"></div>
+                <span class="close-btn">&times;</span>
+            </div>
+            <div class="elemento-arriba">
+                <div class="componente1"></div>
+                <div class="rectangulo-vertical"></div>
+            </div>
+            <div class="popup-content">
+                <div class="popup-cuerpo">
+                    <div id="contenido-popup">
+                        <img class="img-popup" id="img-popup-alta" src="view/img/imgen.jpeg" alt="">
+                        <div class="entradas-popup">
+                            <label class="label-popup" for="nombre-popup">NOMBRE</label>
+                            <input class="inputs-popup" type="text" id="nombre-alta" name="nombre-popup"
+                                placeholder="Nombre">
+                            <label class="label-popup" for="descripcion-popup">DESCRIPCIÓN</label>
+                            <textarea type="text" class="inputs-popup" id="descripcion-alta" name="descripcion-popup"
+                                rows="3" placeholder="Descripcion"></textarea>
+                            <label class="label-popup" for="url-popup-alta">URL DE LA FOTO</label>
+                            <input class="inputs-popup" type="text" id="url-popup-alta" name="url-popup"
+                                placeholder=" URL">
+                            <label class="label-popup" for="tipo_act_alta">TIPO DE ACTIVIDAD</label>
+                            <select class="inputs-popup" name="tipo_act_alta" id="tipo_act_alta"></select>
+                        </div>
+                    </div>
+                    <div class="botones-baja-modificacion">
+                        <button id="boton-alta-act" class="botones">ACEPTAR</button>
+                        <button class="botones" onclick="cancelar()">CANCELAR</button>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="elemento-abajo" id="doss">
+                <div class="componente" id="dos"></div>
+                <div class="rectangulo-vertical"></div>
+            </div>
+        </div>
+    </div>
+    <div id="popup-modificar" class="popup">
+        <div class="contenedor-popup">
+            <div id="banner-popup">
+                <div id="nombre1-popup">MODIFICACIÓN</div>
+                <div class="espacio"></div>
+                <span class="close-btn">&times;</span>
+            </div>
+            <div class="elemento-arriba">
+                <div class="componente1"></div>
+                <div class="rectangulo-vertical"></div>
+            </div>
+            <div class="popup-content">
+                <div class="popup-cuerpo">
+                    <div id="contenido-popup">
+                        <img class="img-popup" id="img-popup-modf" src="view/img/imgen.jpeg" alt="">
+                        <div class="entradas-popup">
+                            <label class="label-popup" for="nombre-popup">NOMBRE</label>
+                            <input class="inputs-popup" type="text" id="nombre-popupModf" name="nombre-popup"
+                                placeholder="Nombre">
+                            <label class="label-popup" for="descripcion-popup">DESCRIPCIÓN</label>
+                            <textarea type="text" class="inputs-popup" id="descripcion-popupModf"
+                                name="descripcion-popup" rows="3" placeholder="Descripcion"></textarea>
+                            <label class="label-popup" for="url-popupModf">URL DE LA FOTO</label>
+                            <input class="inputs-popup" type="text" id="url-popupModf" name="url-popup"
+                                placeholder="URL">
+                            <label class="label-popup" for="tipo_act_mod">TIPO DE ACTIVIDAD</label>
+                            <select class="inputs-popup" id="tipo_act_mod"></select>
+                        </div>
+                    </div>
+                    <div class="botones-baja-modificacion">
+                        <button class="botones" id="btn-mod">ACEPTAR</button>
+                        <button class="botones" onclick="cancelar()">CANCELAR</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="elemento-abajo" id="doss">
+                <div class="componente" id="dos"></div>
+                <div class="rectangulo-vertical"></div>
+            </div>
+        </div>
+    </div>
+    <div id="popup-baja" class="popup">
+        <div class="contenedor-popup">
+            <div id="banner-popup">
+                <div id="nombre1-popup">BAJA</div>
+                <div class="espacio"></div>
+                <span class="close-btn">&times;</span>
+            </div>
+            <div class="elemento-arriba">
+                <div class="componente1"></div>
+                <div class="rectangulo-vertical"></div>
+            </div>
+            <div class="popup-content">
+                <div class="popup-cuerpo">
+                    <div id="contenido-popup">
+                        <div class="entradas-popup" id="text_popup_baja">
+                            ¿ESTÁ SEGURO QUE DESEA ELIMINAR EL REGISTRO SELECCIONADO?
+                        </div>
+                    </div>
+                    <div class="botones-baja-modificacion">
+                        <button class="botones" onclick="borrarActividad()">ACEPTAR</button>
+                        <button class="botones" onclick="cancelar()">CANCELAR</button>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="elemento-abajo" id="doss">
+                <div class="componente" id="dos"></div>
+                <div class="rectangulo-vertical"></div>
+            </div>
+        </div>
+    </div>
+    <script src="js/abm_actividades.js"></script>
+
+</body>
+
+</html>

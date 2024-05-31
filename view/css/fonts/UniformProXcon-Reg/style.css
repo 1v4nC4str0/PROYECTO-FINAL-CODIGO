@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Uniform Pro Extra Condensed';
+    src: local('Uniform Pro Extra Condensed Regular'), local('Uniform-Pro-Extra-Condensed-Regular'),
+        url('UniformProXcon-Reg.woff2') format('woff2'),
+        url('UniformProXcon-Reg.woff') format('woff'),
+        url('UniformProXcon-Reg.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }

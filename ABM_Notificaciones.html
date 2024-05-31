@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>ABM Notificaciones</title>
+    <link rel="stylesheet" href="view/css/abmEventos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    
+</head>
+
+<body>
+    <div class="contenedor-gral">
+        <div class="banner">        
+            <a href="index.html"  class="logo">
+                <img src="view/img/logomasEsic.png" alt="Logo de MAS ESIC">
+            </a>   
+            <div class="espacio"></div>
+            <div class="botones-inicio-notificar">
+                <a href="index.html"><button class="boton-banner">INICIO</button></a>
+                <a href="notificar_general.php"><button class="boton-banner">NOTIFICAR</button></a>
+            </div>
+        </div>
+        <div class="elemento-arriba">
+            <div class="componente"></div>
+            <div class="rectangulo-vertical"></div>
+        </div>
+        <div class="nombre">
+            NOTIFICACIONES
+        </div>
+        <div class="contenedor">
+            <div class="cuerpo">
+                <div class="entradas">
+                    <input class="inputs" type="text" id="descripcion" name="descripcion" placeholder="DESCRIPCIÓN">
+
+                    <select class="inputs" id="tipo" name="tipo">
+                        <option value="">SELECCIONE TIPO</option>
+                        <option value="evento">EVENTO</option>
+                        <option value="actividad">ACTIVIDAD</option>
+                        <option value="general">GENERAL</option>
+                    </select>
+                    <input class="inputs" type="text" id="fecha-rango" name="fecha-rango" placeholder="RANGO DE FECHAS">
+
+                    <button class="lupa" onclick="buscarNotificaciones()"><span
+                            class="material-symbols-outlined">search</span></button>
+                </div>
+                <div class="tabla">
+                    <table id="tabla">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="checkTodos"></th>
+                                <th class="col-id">ID</th>
+                                <th class="col-descripcion">DESCRIPCIÓN</th>
+                                <th class="col-tipo">TIPO</th>
+                                <th class="col-nombre">NOMBRE</th>
+                                <th class="col-fecha-rango">FECHA</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo">
+                        </tbody>
+
+                    </table>
+                    <div id="errorTabla">No hay resultados</div>
+                </div>
+                <div class="botones-baja-modificacion">
+                    <button class="botones" id="boton-baja">BAJA</button>
+                    
+                </div>
+
+            </div>
+        </div>
+        <div class="elemento-abajo" id="doss">
+            <div class="componente" id="dos"></div>
+            <div class="rectangulo-vertical"></div>
+        </div>
+    </div>
+   
+    <div id="popup-baja" class="popup">
+        <div class="contenedor-popup">
+            <div id="banner-popup">
+                <div id="nombre1-popup">BAJA</div>
+                <div class="espacio"></div>
+                <span class="close-btn" onclick="cancelar()">&times;</span>
+            </div>
+            <div class="elemento-arriba">
+                <div class="componente1"></div>
+                <div class="rectangulo-vertical"></div>
+            </div>
+            <div class="popup-content">
+                <div class="popup-cuerpo">
+                    <div class="texto-baja">
+                        ¿ESTÁ SEGURO QUE DESEA ELIMINAR EL REGISTRO SELECCIONADO?
+                    </div>
+
+                    <div class="botones-baja-modificacion">
+                        <button class="botones" onclick="borrar()">ACEPTAR</button>
+                        <button class="botones" onclick="cancelar()">CANCELAR</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="elemento-abajo" id="doss">
+                <div class="componente" id="dos"></div>
+                <div class="rectangulo-vertical"></div>
+            </div>
+        </div>
+    </div>
+    <script src="js/ABM_Notificaciones.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="view/css/index.css" rel="stylesheet" type="text/css">
+    <title>TFC</title>
+</head>
+
+<body>
+    <div class="contenedor-gral">
+        <div class="banner">
+            <div class="logo">
+                <img src="view/img/logomasEsic.png" alt="">
+            </div>
+            <div class="espacio"></div>
+            <div class="botones-inicio-notificar">
+                <button class="boton-banner" onclick="navegar('notificar_general.php')">NOTIFICAR</button>
+            </div>
+        </div>
+
+        <div class="elemento-arriba">
+            <div class="componente"></div>
+            <div class="rectangulo-vertical"></div>
+        </div>
+        <main id="principal">
+            <div class="cuerpo">
+                <div id="eventos" class="seccion">
+                    <div class="titulo">Eventos</div>
+                    <a href="ABM_Eventos.html"><img src="view/img/eventos1.png" alt="" class="imagen-caja"></a>
+                </div>
+                <div id="actividades" class="seccion">
+                    <div class="titulo">Actividades</div>
+                    <a href="ABM_Actividades.html"><img src="view/img/calendario.png" alt="" class="imagen-caja"></a>
+                </div>
+                <div id="usuarios" class="seccion">
+                    <div class="titulo">Usuarios</div>
+                    <a href="ABM_Usuarios.html"><img src="view/img/usuarios.svg" alt="" class="imagen-caja"></a>
+                </div>
+                <div id="cursos" class="seccion">
+                    <div class="titulo">Grados</div>
+                    <a href="ABM_Grado.html"><img src="view/img/cursos.png" alt="" class="imagen-caja"></a>
+                </div>
+                <div id="notificaciones" class="seccion">
+                    <div class="titulo">Notificaciones</div>
+                    <a href="ABM_Notificaciones.html"><img src="view/img/notificaciones.png" alt=""
+                            class="imagen-caja"></a>
+                </div>
+                <div id="tipo_Actividad" class="seccion">
+                    <div class="titulo">Tipo de Actividad</div>
+                    <a href="ABM_Tipo_Actividad.html"><img src="view/img/cursos.png" alt="" class="imagen-caja"></a>
+                </div>
+                <div id="historia" class="seccion">
+                    <div class="titulo">Historias</div>
+                    <a href="ABM_Historias.html"><img src="view/img/historias.png" id="historias" alt=""
+                            class="imagen-caja"></a>
+                </div>
+                <div id="tipo_cursos" class="seccion">
+                    <div class="titulo">Tipo de Grado</div>
+                    <a href="ABM_TipoGrado.html"><img src="view/img/cursos.png" alt="" class="imagen-caja"></a>
+                </div>
+            </div>
+
+        </main>
+        <aside id="doss">
+            <div class="componente" id="dos"></div>
+            <div class="rectangulo-vertical"></div>
+        </aside>
+    </div>
+    <script>
+        function navegar(url) {
+            window.location = url;
+        }
+    </script>
+</body>
+
+</html>
